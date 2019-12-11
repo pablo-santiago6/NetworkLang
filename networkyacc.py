@@ -88,12 +88,3 @@ if __name__ == '__main__':
     result = parser.parse(c)
     print(result)
 """
-
-while(True):
-    try:
-        s = input('')
-        if s == "quit":
-            break
-    except EOFError:
-        break
-    parser.parse(s)
