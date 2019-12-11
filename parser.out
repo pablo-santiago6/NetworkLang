@@ -9,9 +9,9 @@ Grammar
 Rule 0     S' -> program
 Rule 1     program -> statement
 Rule 2     program -> empty
-Rule 3     statement -> CREATE ID IP
-Rule 4     statement -> SEND STR
-Rule 5     statement -> CLOSE
+Rule 3     statement -> CREATE ID IP EXCLAM
+Rule 4     statement -> SEND STR EXCLAM
+Rule 5     statement -> CLOSE EXCLAM
 Rule 6     empty -> <empty>
 
 Terminals, with rules where they appear
@@ -19,6 +19,7 @@ Terminals, with rules where they appear
 CLOSE                : 5
 COMMENT              : 
 CREATE               : 3
+EXCLAM               : 3 4 5
 ID                   : 3
 IP                   : 3
 SEND                 : 4
@@ -38,9 +39,9 @@ state 0
     (0) S' -> . program
     (1) program -> . statement
     (2) program -> . empty
-    (3) statement -> . CREATE ID IP
-    (4) statement -> . SEND STR
-    (5) statement -> . CLOSE
+    (3) statement -> . CREATE ID IP EXCLAM
+    (4) statement -> . SEND STR EXCLAM
+    (5) statement -> . CLOSE EXCLAM
     (6) empty -> .
 
     CREATE          shift and go to state 4
@@ -74,42 +75,63 @@ state 3
 
 state 4
 
-    (3) statement -> CREATE . ID IP
+    (3) statement -> CREATE . ID IP EXCLAM
 
     ID              shift and go to state 7
 
 
 state 5
 
-    (4) statement -> SEND . STR
+    (4) statement -> SEND . STR EXCLAM
 
     STR             shift and go to state 8
 
 
 state 6
 
-    (5) statement -> CLOSE .
+    (5) statement -> CLOSE . EXCLAM
 
-    $end            reduce using rule 5 (statement -> CLOSE .)
+    EXCLAM          shift and go to state 9
 
 
 state 7
 
-    (3) statement -> CREATE ID . IP
+    (3) statement -> CREATE ID . IP EXCLAM
 
-    IP              shift and go to state 9
+    IP              shift and go to state 10
 
 
 state 8
 
-    (4) statement -> SEND STR .
+    (4) statement -> SEND STR . EXCLAM
 
-    $end            reduce using rule 4 (statement -> SEND STR .)
+    EXCLAM          shift and go to state 11
 
 
 state 9
 
-    (3) statement -> CREATE ID IP .
+    (5) statement -> CLOSE EXCLAM .
 
-    $end            reduce using rule 3 (statement -> CREATE ID IP .)
+    $end            reduce using rule 5 (statement -> CLOSE EXCLAM .)
+
+
+state 10
+
+    (3) statement -> CREATE ID IP . EXCLAM
+
+    EXCLAM          shift and go to state 12
+
+
+state 11
+
+    (4) statement -> SEND STR EXCLAM .
+
+    $end            reduce using rule 4 (statement -> SEND STR EXCLAM .)
+
+
+state 12
+
+    (3) statement -> CREATE ID IP EXCLAM .
+
+    $end            reduce using rule 3 (statement -> CREATE ID IP EXCLAM .)
 

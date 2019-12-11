@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftIDSTRleftCREATEleftSENDleftCLOSEleftIPCLOSE COMMENT CREATE ID IP SEND STR\n    program : statement\n            | empty\n    statement : CREATE ID IPstatement : SEND STRstatement : CLOSEempty :'
+_lr_signature = 'leftIDSTRleftCREATEleftSENDleftCLOSEleftIPCLOSE COMMENT CREATE EXCLAM ID IP SEND STR\n    program : statement\n            | empty\n    statement : CREATE ID IP EXCLAMstatement : SEND STR EXCLAMstatement : CLOSE EXCLAMempty :'
     
-_lr_action_items = {'CREATE':([0,],[4,]),'SEND':([0,],[5,]),'CLOSE':([0,],[6,]),'$end':([0,1,2,3,6,8,9,],[-6,0,-1,-2,-5,-4,-3,]),'ID':([4,],[7,]),'STR':([5,],[8,]),'IP':([7,],[9,]),}
+_lr_action_items = {'CREATE':([0,],[4,]),'SEND':([0,],[5,]),'CLOSE':([0,],[6,]),'$end':([0,1,2,3,9,11,12,],[-6,0,-1,-2,-5,-4,-3,]),'ID':([4,],[7,]),'STR':([5,],[8,]),'EXCLAM':([6,8,10,],[9,11,12,]),'IP':([7,],[10,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -29,8 +29,8 @@ _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
   ('program -> statement','program',1,'p_program','networkyacc.py',20),
   ('program -> empty','program',1,'p_program','networkyacc.py',21),
-  ('statement -> CREATE ID IP','statement',3,'p_statement1','networkyacc.py',26),
-  ('statement -> SEND STR','statement',2,'p_statement2','networkyacc.py',33),
-  ('statement -> CLOSE','statement',1,'p_statement3','networkyacc.py',39),
+  ('statement -> CREATE ID IP EXCLAM','statement',4,'p_statement1','networkyacc.py',26),
+  ('statement -> SEND STR EXCLAM','statement',3,'p_statement2','networkyacc.py',33),
+  ('statement -> CLOSE EXCLAM','statement',2,'p_statement3','networkyacc.py',39),
   ('empty -> <empty>','empty',0,'p_empty','networkyacc.py',44),
 ]
