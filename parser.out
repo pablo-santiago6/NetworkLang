@@ -1,0 +1,115 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMENT
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement
+Rule 2     program -> empty
+Rule 3     statement -> CREATE ID IP
+Rule 4     statement -> SEND STR
+Rule 5     statement -> CLOSE
+Rule 6     empty -> <empty>
+
+Terminals, with rules where they appear
+
+CLOSE                : 5
+COMMENT              : 
+CREATE               : 3
+ID                   : 3
+IP                   : 3
+SEND                 : 4
+STR                  : 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+empty                : 2
+program              : 0
+statement            : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement
+    (2) program -> . empty
+    (3) statement -> . CREATE ID IP
+    (4) statement -> . SEND STR
+    (5) statement -> . CLOSE
+    (6) empty -> .
+
+    CREATE          shift and go to state 4
+    SEND            shift and go to state 5
+    CLOSE           shift and go to state 6
+    $end            reduce using rule 6 (empty -> .)
+
+    program                        shift and go to state 1
+    statement                      shift and go to state 2
+    empty                          shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement .
+
+    $end            reduce using rule 1 (program -> statement .)
+
+
+state 3
+
+    (2) program -> empty .
+
+    $end            reduce using rule 2 (program -> empty .)
+
+
+state 4
+
+    (3) statement -> CREATE . ID IP
+
+    ID              shift and go to state 7
+
+
+state 5
+
+    (4) statement -> SEND . STR
+
+    STR             shift and go to state 8
+
+
+state 6
+
+    (5) statement -> CLOSE .
+
+    $end            reduce using rule 5 (statement -> CLOSE .)
+
+
+state 7
+
+    (3) statement -> CREATE ID . IP
+
+    IP              shift and go to state 9
+
+
+state 8
+
+    (4) statement -> SEND STR .
+
+    $end            reduce using rule 4 (statement -> SEND STR .)
+
+
+state 9
+
+    (3) statement -> CREATE ID IP .
+
+    $end            reduce using rule 3 (statement -> CREATE ID IP .)
+

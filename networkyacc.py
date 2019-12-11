@@ -13,6 +13,8 @@ precedence = (
     ('left','IP')
 	)
 
+
+
 def p_program(p):
     '''
     program : statement
@@ -21,20 +23,22 @@ def p_program(p):
     print(p[1])
 
 def p_statement1(p):
-    '''statement : CREATE ID IP'''
-    cl = Icode.server(p[3])
-    p[0] = p[2]
+	'''statement : CREATE ID IP'''
+	global cl
+	cl = Icode.server(p[3])
+	# p[0] = p[2]
 
 
 def p_statement2(p):
-    '''statement : SEND ID ID STR'''
-    Icode.send(p[2], p[4])
-    p[0] = p[4]
+	'''statement : SEND STR'''
+	print(cl)
+	Icode.send(cl, p[2])
+	# p[0] = p[4]
 
 def p_statement3(p):
-    '''statement : CLOSE ID'''
-    Icode.close(p[2])
-    p[0] = p[2]
+    '''statement : CLOSE'''
+    Icode.close(cl)
+    # p[0] = p[2]
 
 def p_empty(p):
 	'''empty :'''
@@ -79,7 +83,7 @@ if __name__ == '__main__':
     print('-- syntax results --')
     print('--------------------\n')
     fp.close()
-    
+
 # global parser
     result = parser.parse(c)
     print(result)
