@@ -17,18 +17,19 @@ tokens = [
     'COMMENT',
     'ID',
     #'TILDE',
-    'IP'
+    'IP',
+    'EXCLAM'
 ]
 
 tokens += reserved.values()
 
 t_ignore = ' \t'
-
+t_EXCLAM = r'\!'
 #t_TILDE = '\~'
 
 t_IP = r'\d+\.\d+\.\d+\.\d+'
 
-t_STR = r'\~\s*[a-zA-Z_0-9\!\@\#\$\%\^\&\*\(\)\"\'\.\,]+\s*\~'
+t_STR = r'\~(.+?)\~'
 
 
 def t_ID(t):
