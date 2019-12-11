@@ -20,23 +20,23 @@ def p_program(p):
     program : statement
             | empty
     '''
-    print(p[1])
+    # print(p[1])
 
 def p_statement1(p):
-	'''statement : CREATE ID IP'''
+	'''statement : CREATE ID IP EXCLAM'''
 	global cl
 	cl = Icode.server(p[3])
 	# p[0] = p[2]
 
 
 def p_statement2(p):
-	'''statement : SEND STR'''
-	print(cl)
-	Icode.send(cl, p[2])
+	'''statement : SEND STR EXCLAM'''
+	# print(cl)
+	Icode.send(cl, p[2][1:len(p[2])-1])
 	# p[0] = p[4]
 
 def p_statement3(p):
-    '''statement : CLOSE'''
+    '''statement : CLOSE EXCLAM'''
     Icode.close(cl)
     # p[0] = p[2]
 
