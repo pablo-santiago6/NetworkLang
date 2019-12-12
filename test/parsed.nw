@@ -1,4 +1,0 @@
-create server1 10.32.9.137
-; ignore this
-send ~ hello ~
-send ~459~
